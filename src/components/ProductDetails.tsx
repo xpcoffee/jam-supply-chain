@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { fetchProduct, selectError, selectProduct, selectProductsStatus } from "../resources/productSlice";
+import "@testing-library/jest-dom";
 
 /**
  * Displays the details of a given product ID.

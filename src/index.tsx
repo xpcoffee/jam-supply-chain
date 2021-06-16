@@ -5,11 +5,12 @@ import App from "./App";
 import { store } from "./app/store";
 import { Provider } from "react-redux";
 import * as serviceWorker from "./serviceWorker";
-import { ErrorBoundary } from "./components/ErrorBoundary";
+import { ErrorBoundary } from "react-error-boundary";
+import { ErrorFallback } from "./components/ErrorFallback";
 
 ReactDOM.render(
     <React.StrictMode>
-        <ErrorBoundary>
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
             <Provider store={store}>
                 <App />
             </Provider>

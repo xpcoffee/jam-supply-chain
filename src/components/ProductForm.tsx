@@ -9,11 +9,12 @@ import {
     selectProduct,
     selectProductsStatus,
 } from "../resources/productSlice";
-import { Field, Form, Formik } from "formik";
+import { Form, Formik } from "formik";
 import { ExistingProduct, Product } from "../api/types";
 import { useHistory } from "react-router";
+import { Button, TextField } from "@material-ui/core";
 
-export const ProductForm = ({ id }: Props) => {
+export const ProductForm = ({ id, onCancel }: Props) => {
     const history = useHistory();
 
     const product = useAppSelector((state) => selectProduct(state, id));
@@ -49,28 +50,16 @@ export const ProductForm = ({ id }: Props) => {
                 }
 
                 return (
-                    <Form>
-                        {id && (
-                            <label>
-                                ID
-                                <span>{id}</span>
-                            </label>
-                        )}
-                        <label>
-                            Name
-                            <Field type="text" name="name" />
-                        </label>
-                        <label>
-                            Price
-                            <Field type="number" name="price" />
-                        </label>
-                        <label>
-                            Quantity
-                            <Field type="number" name="quantity" />
-                        </label>
-                        <button type="submit" disabled={isSubmitting}>
+                    <Form className="productForm">
+                        {id && <h3>ID: {id}</h3>}
+                        <TextField fullWidth label="Name" type="text" name="name" />
+                        <TextField fullWidth label="Price" type="number" name="price" />
+                        <TextField fullWidth label="Quantity" type="number" name="quantity" />
+                        <div className="verticalSpacer"></div>
+                        <Button color="primary" variant="contained" type="submit" disabled={isSubmitting}>
                             Submit
-                        </button>
+                        </Button>
+                        <Button onClick={onCancel}>Cancel</Button>
                     </Form>
                 );
             }}
@@ -82,4 +71,5 @@ export const ProductForm = ({ id }: Props) => {
 
 interface Props {
     id?: string;
+    onCancel: () => void;
 }

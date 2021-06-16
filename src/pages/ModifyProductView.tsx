@@ -20,8 +20,7 @@ export const ModifyProductView = ({ id }: Props) => {
                 <Typography color="textPrimary">Modify</Typography>
             </Breadcrumbs>
             <h1>Modify product: {id}</h1>
-            <Button onClick={navigateBackToProduct}>Cancel</Button>
-            <ProductForm id={id} />
+            <ProductForm id={id} onCancel={navigateBackToProduct} />
         </>
     );
 };

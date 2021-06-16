@@ -1,4 +1,4 @@
-import { Breadcrumbs, Button, Link, Typography } from "@material-ui/core";
+import { Breadcrumbs, Link, Typography } from "@material-ui/core";
 import React from "react";
 import { useHistory } from "react-router";
 import { ProductForm } from "../components/ProductForm";
@@ -15,8 +15,7 @@ export const CreateProductView = () => {
                 <Typography color="textPrimary">New</Typography>
             </Breadcrumbs>
             <h1>Create new product</h1>
-            <Button onClick={navigateToProducts}>Cancel</Button>
-            <ProductForm />
+            <ProductForm onCancel={navigateToProducts} />
         </>
     );
 };

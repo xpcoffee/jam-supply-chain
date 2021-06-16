@@ -12,6 +12,9 @@ enum TableKey {
     quantity = "colQuantity",
 }
 
+/**
+ * Displays a list of products.
+ */
 export const ProductTable = ({ onSelect }: Props) => {
     const products = useAppSelector(selectProducts);
     const status = useAppSelector(selectProductsStatus);
@@ -40,6 +43,9 @@ export const ProductTable = ({ onSelect }: Props) => {
         []
     );
 
+    /**
+     * Fetch products if the page hasn't yet been loaded
+     */
     useEffect(() => {
         if (!dirty) {
             dispatch(fetchProducts());
@@ -55,10 +61,9 @@ export const ProductTable = ({ onSelect }: Props) => {
             {
                 id: "selection",
                 Cell: ({ row }: any) => {
-                    const {
-                        checked,
-                        onChange: toggleRow,
-                    } = (row as UseRowSelectRowProps<FormattedProduct>).getToggleRowSelectedProps();
+                    const { checked, onChange: toggleRow } = (
+                        row as UseRowSelectRowProps<FormattedProduct>
+                    ).getToggleRowSelectedProps();
 
                     return (
                         <div>
@@ -89,14 +94,21 @@ export const ProductTable = ({ onSelect }: Props) => {
         toggleAllRowsSelected,
     } = useTable({ data, columns }, useRowSelect, selectColumnHook);
 
+    /**
+     * Handle row selection
+     */
     useEffect(() => {
-        const tableSelectionState: UseRowSelectState<FormattedProduct> = tableState as UseRowSelectState<FormattedProduct>;
+        const tableSelectionState: UseRowSelectState<FormattedProduct> =
+            tableState as UseRowSelectState<FormattedProduct>;
         const selectedRows = tableSelectionState?.selectedRowIds;
-        const selectedRowIndex = (Object.keys(selectedRows)[0] as unknown) as number;
+        const selectedRowIndex = Object.keys(selectedRows)[0] as unknown as number;
         const selectedId = data[selectedRowIndex]?.colId;
         onSelect && onSelect(selectedId);
     }, [data, onSelect, tableState]);
 
+    /**
+     * Render the table
+     */
     const table = (() => {
         if (loading) {
             return loading;
