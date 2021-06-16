@@ -18,11 +18,11 @@ export const initialState: ProductState = {
 };
 
 export const fetchProducts = createAsyncThunk("product/list", async () => {
-    return await supplyChainClient.listProducts();
+    return supplyChainClient.listProducts();
 });
 
 export const fetchProduct = createAsyncThunk("product/get", async (id: string) => {
-    return await supplyChainClient.getProduct(id);
+    return supplyChainClient.getProduct(id);
 });
 
 export const createProduct = createAsyncThunk("product/create", async (product: Product) => {
@@ -33,11 +33,11 @@ export const createProduct = createAsyncThunk("product/create", async (product: 
         quantity: product.quantity,
         price: product.price,
     };
-    return await supplyChainClient.updateProduct(productWithoutId);
+    return supplyChainClient.updateProduct(productWithoutId);
 });
 
 export const modifyProduct = createAsyncThunk("product/modify", async (product: ExistingProduct) => {
-    return await supplyChainClient.updateProduct(product);
+    return supplyChainClient.updateProduct(product);
 });
 
 export const deleteProduct = createAsyncThunk("product/delete", async (id: string) => {
