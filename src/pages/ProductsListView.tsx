@@ -12,21 +12,30 @@ export const ProductsListView = () => {
     return (
         <>
             <h1>Products</h1>
-            <Button onClick={() => history.push(AppPath.NewProduct)}>New Product</Button>
-            <Button
-                disabled={selectedId === undefined}
-                onClick={() => selectedId && history.push(AppPath.ViewProduct(selectedId))}
-            >
-                View details
-            </Button>
-            <Button
-                disabled={selectedId === undefined}
-                onClick={() => selectedId && history.push(AppPath.ModifyProduct(selectedId))}
-            >
-                Modify
-            </Button>
-            <DeleteProductButton id={selectedId} />
-            <ProductTable onSelect={(id) => setSelectedId(id)} />
+            <div className="listViewContainer">
+                <div className="listViewActions">
+                    <Button variant="contained" color="primary" onClick={() => history.push(AppPath.NewProduct)}>
+                        New Product
+                    </Button>
+                    <Button
+                        variant="outlined"
+                        disabled={selectedId === undefined}
+                        onClick={() => selectedId && history.push(AppPath.ViewProduct(selectedId))}
+                    >
+                        View details
+                    </Button>
+                    <Button
+                        variant="outlined"
+                        disabled={selectedId === undefined}
+                        onClick={() => selectedId && history.push(AppPath.ModifyProduct(selectedId))}
+                    >
+                        Modify
+                    </Button>
+                    <DeleteProductButton id={selectedId} />
+                </div>
+                <div className="verticalSpacer"></div>
+                <ProductTable onSelect={(id) => setSelectedId(id)} />
+            </div>
         </>
     );
 };

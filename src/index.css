@@ -22,3 +22,13 @@ code {
 .verticalSpacer {
     margin-top: 1em;
 }
+
+.listViewActions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.listViewContainer {
+    min-width: 50%;
+}

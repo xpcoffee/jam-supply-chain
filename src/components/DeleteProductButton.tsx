@@ -14,7 +14,13 @@ export const DeleteProductButton = ({ id, global = window }: Props) => {
     };
 
     return (
-        <Button aria-label={"delete-product"} disabled={id === undefined} onClick={confirmAndDelete}>
+        <Button
+            aria-label={"delete-product"}
+            color="secondary"
+            variant="outlined"
+            disabled={id === undefined}
+            onClick={confirmAndDelete}
+        >
             Delete
         </Button>
     );
