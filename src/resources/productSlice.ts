@@ -51,10 +51,7 @@ export const productSlice = createSlice({
     initialState,
     reducers: {
         // clears local record state
-        clear: (state) => {
-            state.items = {};
-            state.latestModifiedProductId = undefined;
-        },
+        clear: () => initialState,
         // updates a single record in local state
         updateProductLocally: (state, action: PayloadAction<ExistingProduct>) => {
             updateProductRecord(state.items, [action.payload]);
@@ -155,3 +152,5 @@ export const selectError = (rootState: RootState) => rootState.products.error;
 
 export const { clear } = productSlice.actions;
 export default productSlice.reducer;
+
+export const FOR_TESTING_ONLY = { updateProductRecord };
