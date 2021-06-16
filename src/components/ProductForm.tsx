@@ -9,7 +9,7 @@ import {
     selectProduct,
     selectProductsStatus,
 } from "../resources/productSlice";
-import { Form, Formik } from "formik";
+import { useFormik } from "formik";
 import { ExistingProduct, Product } from "../api/types";
 import { useHistory } from "react-router";
 import { Button, TextField } from "@material-ui/core";
@@ -35,35 +35,47 @@ export const ProductForm = ({ id, onCancel }: Props) => {
     const readyToShowForm = id === undefined || product !== undefined || errorMessage === "Not found";
 
     const initialValues: Product = product || { id: "", name: "", quantity: 0, price: 0 };
-    const form = readyToShowForm && (
-        <Formik
-            initialValues={initialValues}
-            onSubmit={(values) => {
-                const action = values.id ? modifyProduct(values as ExistingProduct) : createProduct(values);
-                dispatch(action);
-            }}
-        >
-            {({ isSubmitting, setSubmitting }) => {
-                if (isSubmitting && lastModifiedProductId) {
-                    setSubmitting(false);
-                    history.push(`/products/${lastModifiedProductId}`);
-                }
+    const { values, isSubmitting, setSubmitting, handleSubmit, handleChange } = useFormik({
+        initialValues,
+        onSubmit: (values) => {
+            const action = values.id ? modifyProduct(values as ExistingProduct) : createProduct(values);
+            dispatch(action);
+        },
+    });
 
-                return (
-                    <Form className="productForm">
-                        {id && <h3>ID: {id}</h3>}
-                        <TextField fullWidth label="Name" type="text" name="name" />
-                        <TextField fullWidth label="Price" type="number" name="price" />
-                        <TextField fullWidth label="Quantity" type="number" name="quantity" />
-                        <div className="verticalSpacer"></div>
-                        <Button color="primary" variant="contained" type="submit" disabled={isSubmitting}>
-                            Submit
-                        </Button>
-                        <Button onClick={onCancel}>Cancel</Button>
-                    </Form>
-                );
-            }}
-        </Formik>
+    useEffect(() => {
+        if (isSubmitting && lastModifiedProductId) {
+            setSubmitting(false);
+            history.push(`/products/${lastModifiedProductId}`);
+        }
+    }, [history, isSubmitting, lastModifiedProductId, setSubmitting]);
+
+    const form = readyToShowForm && (
+        <form className="productForm" onSubmit={handleSubmit}>
+            {id && <h3>ID: {id}</h3>}
+            <TextField fullWidth label="Name" type="text" name="name" value={values.name} onChange={handleChange} />
+            <TextField
+                fullWidth
+                label="Price"
+                type="number"
+                name="price"
+                value={values.price}
+                onChange={handleChange}
+            />
+            <TextField
+                fullWidth
+                label="Quantity"
+                type="number"
+                name="quantity"
+                value={values.quantity}
+                onChange={handleChange}
+            />
+            <div className="verticalSpacer"></div>
+            <Button color="primary" variant="contained" type="submit" disabled={isSubmitting}>
+                Submit
+            </Button>
+            <Button onClick={onCancel}>Cancel</Button>
+        </form>
     );
 
     return <>{loading || error || form}</>;

@@ -119,7 +119,7 @@ export const ProductTable = ({ onSelect }: Props) => {
         }
 
         return (
-            <table {...getTableProps()}>
+            <table className="productTable" {...getTableProps()}>
                 <thead>
                     {headerGroups.map((headerGroup) => (
                         <tr {...headerGroup.getHeaderGroupProps()}>
