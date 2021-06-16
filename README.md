@@ -1,6 +1,6 @@
 # JAM Supply Chain
 
-A JAM stack UI for the Supply Chain API.
+A CRUD UI the Supply Chain API.
 
 ## Context
 
@@ -8,7 +8,11 @@ This site was bootstrapped using `create-react-app` and uses `react-scripts` to 
 
 ## Local development
 
-### Local dev server
+### Gettings started
+
+To start developing, start the devserver to start the app locally and run tests in watch mode.
+
+**Run your local dev server**
 
 Run `npm start` to start the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -16,17 +20,21 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
 
-### Proxy server
-
-CORS isn't set up on the test endpoint to be able to call against it directly. To make calls in dev-mode,
-a local proxy server is configured using `package.json`.
-
-The dev server currently points to `https://ev5uwiczj6.execute-api.eu-central-1.amazonaws.com/test`.
-
-### Unit testing
+**Run tests**
 
 Run `npm test` to run jest in the interactive watch mode.<br />
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+### Where should I make a change?
+
+See [STRUCTURE.md](./STRUCTURE.md) for an overview of the layout of the project.
+
+### Proxy server
+
+CORS isn't set up on the test SupplyChain API endpoint; we can't call against it directly. To make calls from your dev-server,
+a local proxy server is configured using `package.json`.
+
+The dev server currently points to `https://ev5uwiczj6.execute-api.eu-central-1.amazonaws.com/test`.
 
 ### Create production artifacts
 
